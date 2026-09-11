@@ -329,8 +329,6 @@ p:last-child { margin-bottom: 0; }
 .hero {
   position: relative;
   min-height: 100svh;
-  display: flex;
-  align-items: flex-end;
   overflow: hidden;
 }
 
@@ -353,10 +351,12 @@ p:last-child { margin-bottom: 0; }
 }
 
 .hero-content {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
-  padding-bottom: 9vh;
-  max-width: 780px;
+  padding-bottom: max(88px, 9vh);
 }
 
 .hero-heading {
