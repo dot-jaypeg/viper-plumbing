@@ -22,6 +22,26 @@
     }
   }
 
+  // Hero trust-signal text rotator
+  var rotatorWord = document.getElementById('hero-rotator-word');
+  if (rotatorWord) {
+    var rotatorPhrases = ['Licensed & Insured', '24/7 Emergency', 'Family Owned', 'Free Camera Scope'];
+    var rotatorIndex = 0;
+    var rotatorReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setInterval(function () {
+      rotatorIndex = (rotatorIndex + 1) % rotatorPhrases.length;
+      if (rotatorReduceMotion) {
+        rotatorWord.textContent = rotatorPhrases[rotatorIndex];
+        return;
+      }
+      rotatorWord.classList.add('is-out');
+      setTimeout(function () {
+        rotatorWord.textContent = rotatorPhrases[rotatorIndex];
+        rotatorWord.classList.remove('is-out');
+      }, 350);
+    }, 2200);
+  }
+
   // Sticky header background on scroll
   var header = document.getElementById('site-header');
   function updateHeaderState() {
