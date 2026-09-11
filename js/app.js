@@ -1,6 +1,27 @@
 (function () {
   'use strict';
 
+  // Splash screen — logo intro, once per browser session
+  var splash = document.getElementById('splash');
+  if (splash) {
+    var splashSeen = false;
+    try { splashSeen = sessionStorage.getItem('viper-splash-seen') === '1'; } catch (e) {}
+
+    if (splashSeen) {
+      splash.remove();
+    } else {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.body.classList.add('no-scroll');
+      var hideDelay = reduceMotion ? 100 : 1400;
+      setTimeout(function () {
+        splash.classList.add('is-hidden');
+        document.body.classList.remove('no-scroll');
+        try { sessionStorage.setItem('viper-splash-seen', '1'); } catch (e) {}
+        setTimeout(function () { splash.remove(); }, reduceMotion ? 0 : 650);
+      }, hideDelay);
+    }
+  }
+
   // Sticky header background on scroll
   var header = document.getElementById('site-header');
   function updateHeaderState() {
