@@ -373,6 +373,9 @@ body.no-scroll { overflow: hidden; height: 100%; }
 .hero {
   position: relative;
   min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
 }
 
@@ -395,11 +398,13 @@ body.no-scroll { overflow: hidden; height: 100%; }
 }
 
 .hero-content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 28px;
+  padding-top: calc(var(--announce-h) + 78px + 40px);
   padding-bottom: max(88px, 9vh);
 }
 
