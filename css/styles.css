@@ -115,6 +115,7 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -129,7 +130,7 @@ h1, h2, h3 {
   font-weight: 600;
   line-height: 1.05;
   margin: 0 0 0.4em;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
 }
 
@@ -224,7 +225,7 @@ body.no-scroll { overflow: hidden; height: 100%; }
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.05rem;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   background: transparent;
   color: var(--white);
   border: 2px solid var(--white);
@@ -273,7 +274,7 @@ body.no-scroll { overflow: hidden; height: 100%; }
 
 .section-heading {
   font-size: clamp(2.8rem, 6.5vw, 5.5rem);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 /* ============================
@@ -315,7 +316,7 @@ body.no-scroll { overflow: hidden; height: 100%; }
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 1.02rem;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   color: var(--white);
   opacity: 0.85;
   transition: opacity 0.2s var(--ease);
@@ -410,7 +411,8 @@ body.no-scroll { overflow: hidden; height: 100%; }
 
 .hero-heading {
   font-size: clamp(3.2rem, 8.5vw, 7rem);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.15em;
   color: var(--white);
 }
 
@@ -419,7 +421,7 @@ body.no-scroll { overflow: hidden; height: 100%; }
   align-items: center;
   gap: 10px;
   height: 1.4em;
-  margin: 0.7em 0 0;
+  margin: 0 0 0.5em;
   overflow: hidden;
 }
 .hero-rotator::before {
@@ -450,6 +452,7 @@ body.no-scroll { overflow: hidden; height: 100%; }
 .hero-sub {
   font-size: 1.15rem;
   max-width: 560px;
+  margin-bottom: 0.6em;
   color: rgba(255,255,255,0.78);
 }
 
@@ -457,19 +460,25 @@ body.no-scroll { overflow: hidden; height: 100%; }
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: 1.6em;
+  margin-top: 0.6em;
 }
 
 .scroll-cue {
-  position: absolute;
+  position: fixed;
   bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 5;
   width: 20px;
   height: 32px;
   border: 1px solid rgba(255,255,255,0.4);
   border-radius: 999px;
+  opacity: 1;
+  transition: opacity 0.3s var(--ease);
+}
+.scroll-cue.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 .scroll-cue span {
   position: absolute;

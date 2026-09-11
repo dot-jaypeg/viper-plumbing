@@ -44,9 +44,10 @@
 
   // Sticky header background on scroll
   var header = document.getElementById('site-header');
+  var scrollCue = document.querySelector('.scroll-cue');
   function updateHeaderState() {
-    if (!header) return;
-    header.classList.toggle('is-scrolled', window.scrollY > 40);
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 40);
+    if (scrollCue) scrollCue.classList.toggle('is-hidden', window.scrollY > 80);
   }
   updateHeaderState();
   window.addEventListener('scroll', updateHeaderState, { passive: true });
