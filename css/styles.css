@@ -368,6 +368,26 @@ body.no-scroll { overflow: hidden; height: 100%; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ============================
+   Page hero (subpage banner)
+   ============================ */
+
+.page-hero {
+  padding-top: calc(var(--announce-h) + 78px + 60px);
+  padding-bottom: 60px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+}
+.page-hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  letter-spacing: -0.03em;
+  max-width: 800px;
+}
+.page-hero p {
+  max-width: 600px;
+  font-size: 1.1rem;
+}
+
+/* ============================
    Hero
    ============================ */
 
@@ -582,6 +602,21 @@ body.no-scroll { overflow: hidden; height: 100%; }
   background: var(--white);
 }
 
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.text-link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--blue-light);
+  transition: color 0.2s var(--ease);
+}
+.text-link:hover { color: var(--white); }
+
 /* ============================
    Promo
    ============================ */
@@ -620,6 +655,13 @@ body.no-scroll { overflow: hidden; height: 100%; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  margin-top: 48px;
+}
+.services-grid-expanded {
+  grid-template-columns: repeat(2, 1fr);
+}
+.services-cta {
+  text-align: center;
   margin-top: 48px;
 }
 
