@@ -372,10 +372,34 @@ body.no-scroll { overflow: hidden; height: 100%; }
    ============================ */
 
 .page-hero {
+  position: relative;
   padding-top: calc(var(--announce-h) + 78px + 60px);
   padding-bottom: 60px;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.page-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.page-hero-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,16,41,0.8) 0%, rgba(0,16,41,0.92) 100%),
+    linear-gradient(90deg, rgba(0,16,41,0.88) 0%, rgba(0,16,41,0.35) 65%);
+}
+.page-hero .container {
+  position: relative;
+  z-index: 1;
 }
 .page-hero h1 {
   font-size: clamp(2.6rem, 6vw, 4.5rem);
