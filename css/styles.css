@@ -394,8 +394,8 @@ body.no-scroll { overflow: hidden; height: 100%; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0,16,41,0.32) 0%, rgba(0,16,41,0.48) 100%),
-    linear-gradient(90deg, rgba(0,16,41,0.42) 0%, rgba(0,16,41,0.14) 65%);
+    linear-gradient(180deg, rgba(0,16,41,0.58) 0%, rgba(0,16,41,0.75) 100%),
+    linear-gradient(90deg, rgba(0,16,41,0.68) 0%, rgba(0,16,41,0.3) 65%);
 }
 .page-hero .container {
   position: relative;
