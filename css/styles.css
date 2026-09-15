@@ -691,6 +691,23 @@ body.no-scroll { overflow: hidden; height: 100%; }
 }
 
 /* ============================
+   Reviews
+   ============================ */
+
+.reviews {
+  padding: clamp(70px, 9vw, 110px) 0;
+  border-bottom: 1px solid var(--border);
+}
+.reviews-inner {
+  max-width: 640px;
+  text-align: center;
+  margin: 0 auto;
+}
+.reviews-inner .btn {
+  margin-top: 0.4em;
+}
+
+/* ============================
    Contact
    ============================ */
 
