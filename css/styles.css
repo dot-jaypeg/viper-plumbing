@@ -89,7 +89,7 @@
   --blue-light: #4d7fd6;
   --blue-glow: rgba(0, 66, 170, 0.45);
 
-  --gray: #919191;
+  --gray: #8095b3;
   --white: #f4f5f7;
 
   --font-display: 'Saira Condensed', 'Arial Narrow', sans-serif;
@@ -394,8 +394,8 @@ body.no-scroll { overflow: hidden; height: 100%; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0,16,41,0.5) 0%, rgba(0,16,41,0.65) 100%),
-    linear-gradient(90deg, rgba(0,16,41,0.6) 0%, rgba(0,16,41,0.18) 65%);
+    linear-gradient(180deg, rgba(0,16,41,0.22) 0%, rgba(0,16,41,0.38) 100%),
+    linear-gradient(90deg, rgba(0,16,41,0.32) 0%, rgba(0,16,41,0.08) 65%);
 }
 .page-hero .container {
   position: relative;
@@ -683,6 +683,9 @@ body.no-scroll { overflow: hidden; height: 100%; }
 }
 .services-grid-expanded {
   grid-template-columns: repeat(2, 1fr);
+}
+.services-grid-3col {
+  grid-template-columns: repeat(3, 1fr);
 }
 .services-cta {
   text-align: center;
