@@ -99,15 +99,162 @@
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  // Contact form — working prototype only, not yet wired to a live inbox
-  // (destination CRM/integration to be decided; likely GoHighLevel)
-  var form = document.getElementById('contact-form');
-  if (form) {
+  // Lead forms — post straight from the browser to the GHL inbound webhook
+  // (workflow "ENDPOINT - website-forms"). No server hop; GHL is the only backend.
+  var GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/Znb6kB9cRNv6WN1qmd1M/webhook-trigger/34276839-5659-4226-b945-a63d70595e3f';
+  var PHONE_DISPLAY = '(657) 637-8529';
+  var ATTR_KEY = 'viper-attr';
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
+
+  // First-touch attribution: captured once, never overwritten
+  function captureFirstTouch() {
+    var stored = {};
+    try { stored = JSON.parse(localStorage.getItem(ATTR_KEY) || '{}'); } catch (e) {}
+    if (stored._captured) return stored;
+    var query = new URLSearchParams(window.location.search);
+    var attr = {
+      _captured: new Date().toISOString(),
+      landing_page: window.location.pathname + window.location.search,
+      referrer: document.referrer || ''
+    };
+    UTM_KEYS.forEach(function (k) { attr[k] = query.get(k) || ''; });
+    try { localStorage.setItem(ATTR_KEY, JSON.stringify(attr)); } catch (e) {}
+    return attr;
+  }
+  var attribution = captureFirstTouch();
+
+  function toKey(name) {
+    return String(name).trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  }
+
+  // US numbers -> +1XXXXXXXXXX (GHL dedupes contacts on E.164)
+  function toE164(raw) {
+    var digits = String(raw || '').replace(/\D/g, '');
+    if (digits.length === 10) return '+1' + digits;
+    if (digits.length === 11 && digits[0] === '1') return '+' + digits;
+    return String(raw || '').trim();
+  }
+
+  function newEventId() {
+    return (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
+  }
+
+  function buildLeadPayload(form) {
+    var data = {};
+    new FormData(form).forEach(function (value, key) {
+      if (key === 'website') return; // never send the honeypot
+      data[key === 'Source' ? 'form_source' : toKey(key)] = typeof value === 'string' ? value.trim() : value;
+    });
+    var parts = (data.name || '').split(/\s+/).filter(Boolean);
+    data.full_name = data.name || '';
+    data.first_name = parts.shift() || '';
+    data.last_name = parts.join(' ');
+    delete data.name;
+    data.phone = toE164(data.phone);
+    data.source = 'Website';
+    data.form_name = window.location.pathname.replace(/\/+$/, '').replace(/\.html$/, '').replace(/^\/+/, '') || 'home';
+    if (data.form_name === 'index') data.form_name = 'home';
+    data.form_id = form.id || '';
+    data.page_url = window.location.href.split('#')[0];
+    data.submitted_at = new Date().toISOString();
+    return data;
+  }
+
+  function fillHiddenFields(form) {
+    UTM_KEYS.concat(['referrer', 'landing_page']).forEach(function (k) {
+      var el = form.querySelector('input[name="' + k + '"]');
+      if (el) el.value = attribution[k] || '';
+    });
+    var eid = form.querySelector('input[name="event_id"]');
+    if (eid) eid.value = newEventId();
+  }
+
+  function validateLead(form) {
+    var errors = [];
+    var name = form.querySelector('[name="name"]');
+    var phone = form.querySelector('[name="phone"]');
+    var email = form.querySelector('[name="email"]');
+    form.querySelectorAll('.is-invalid').forEach(function (el) { el.classList.remove('is-invalid'); });
+    if (name && !name.value.trim()) errors.push([name, 'your name']);
+    if (phone && String(phone.value).replace(/\D/g, '').length < 10) errors.push([phone, 'a valid phone number']);
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) errors.push([email, 'a valid email']);
+    errors.forEach(function (err) {
+      err[0].classList.add('is-invalid');
+      err[0].setAttribute('aria-invalid', 'true');
+    });
+    if (errors.length) errors[0][0].focus();
+    return errors.map(function (err) { return err[1]; });
+  }
+
+  document.querySelectorAll('form[data-contact-form]').forEach(function (form) {
+    fillHiddenFields(form);
+    form.setAttribute('novalidate', '');
+    var status = form.querySelector('[data-form-status]');
+    var btn = form.querySelector('[type="submit"]');
+    var btnLabel = btn ? btn.textContent : '';
+    var busy = false;
+
+    function showStatus(msg, isError) {
+      if (!status) return;
+      status.hidden = false;
+      status.textContent = msg;
+      status.classList.toggle('is-error', !!isError);
+    }
+
+    function showSuccess() {
+      if (status) status.hidden = true;
+      form.reset();
+      fillHiddenFields(form);
+      form.classList.add('is-submitted');
+    }
+
+    form.querySelectorAll('input, select, textarea').forEach(function (el) {
+      el.addEventListener('input', function () {
+        el.classList.remove('is-invalid');
+        el.removeAttribute('aria-invalid');
+      });
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      form.classList.add('is-submitted');
+      if (busy) return; // duplicate-submit guard
+
+      var hp = form.querySelector('input[name="website"]');
+      if (hp && hp.value.trim()) { showSuccess(); return; } // bot: fake success, send nothing
+
+      var missing = validateLead(form);
+      if (missing.length) {
+        showStatus('Please enter ' + missing.join(', ') + '.', true);
+        return;
+      }
+
+      var payload = buildLeadPayload(form);
+      busy = true;
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      if (status) status.hidden = true;
+
+      fetch(GHL_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) {
+          if (res.ok) {
+            if (window.gtag) gtag('event', 'generate_lead', { event_id: payload.event_id, currency: 'USD' });
+            showSuccess();
+          } else {
+            showStatus('Something went wrong sending your request. Please call us at ' + PHONE_DISPLAY + '.', true);
+          }
+        })
+        .catch(function () {
+          showStatus('We couldn’t send your request. Please call us at ' + PHONE_DISPLAY + '.', true);
+        })
+        .finally(function () {
+          busy = false;
+          if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+        });
     });
-  }
+  });
 
   // Footer year
   var yearEl = document.getElementById('footer-year');

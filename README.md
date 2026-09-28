@@ -29,4 +29,4 @@ Dark, near-black theme with brand blue (#0042aa) as the single glowing accent an
 - Brand colors: `#0042aa`, `#919191`
 - No client-provided photos/videos yet — homepage uses stock media only until real content is available
 - `assets/content/stock/` is gitignored: the raw clips include files over GitHub's 100MB push limit, and none of it is web-optimized. Only trimmed/compressed clips actually used on a page are committed, under `assets/content/video/web/`.
-- Contact form is a working prototype (not yet wired to a live inbox/CRM)
+- Lead forms (homepage + contact page) post directly from the browser to a GoHighLevel inbound webhook (workflow `ENDPOINT - website-forms`) — see `js/app.js`. No server hop; the site stays fully static. Forms are told apart by the hidden `Source` input (`form_source`) and page slug (`form_name`). Renaming a field or a Service Needed option changes what GHL receives, so update the workflow mapping at the same time.
