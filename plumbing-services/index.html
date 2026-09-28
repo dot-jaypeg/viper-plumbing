@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Tag Manager: paste the container snippet here once the GTM ID is issued.
-     ghl-form.js already pushes generate_lead to the dataLayer on every successful lead. -->
+     js/app.js already fires gtag('event', 'generate_lead') on every successful lead. -->
 <script>window.dataLayer = window.dataLayer || [];</script>
 <title>Plumbing Services in Anaheim, CA | Local Plumbers | Viper Rooter &amp; Plumbing</title>
 <meta name="description" content="Plumbing services and repairs from local, family-owned plumbers in Anaheim and surrounding areas. Open 24/7, licensed &amp; insured (Lic #1022901), $89 drain cleaning special. Call (657) 637-8529.">
@@ -212,37 +212,42 @@
         </ul>
       </div>
 
-      <form class="contact-form lp-form" id="quote" data-ghl-form novalidate>
-        <h2 class="form-title">Get a Free Quote</h2>
-        <p class="form-sub">Tell us what&rsquo;s going on. A member of the Viper team will be in touch shortly.</p>
+      <div class="hero-form" id="quote">
+      <form class="contact-form" id="contact-form" data-contact-form novalidate>
+        <input type="hidden" name="Source" value="Landing Page - Plumbing Services">
+        <input type="hidden" name="utm_source" value="">
+        <input type="hidden" name="utm_medium" value="">
+        <input type="hidden" name="utm_campaign" value="">
+        <input type="hidden" name="utm_term" value="">
+        <input type="hidden" name="utm_content" value="">
+        <input type="hidden" name="gclid" value="">
+        <input type="hidden" name="fbclid" value="">
+        <input type="hidden" name="referrer" value="">
+        <input type="hidden" name="landing_page" value="">
+        <input type="hidden" name="event_id" value="">
         <div class="form-hp" aria-hidden="true">
-          <label for="q-company-website">Company website</label>
-          <input type="text" id="q-company-website" name="company_website" tabindex="-1" autocomplete="off">
+          <label for="x-website">Website</label>
+          <input type="text" id="x-website" name="website" value="" tabindex="-1" autocomplete="off">
         </div>
-        <div class="form-grid">
-          <div class="form-row full">
-            <label for="q-name">Full Name</label>
-            <input type="text" id="q-name" name="name" autocomplete="name" required data-msg="Please enter your name">
-            <span class="field-err" data-err-for="q-name"></span>
+        <div class="form-fields">
+          <div class="form-row">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-row form-row-split">
+            <div>
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
           </div>
           <div class="form-row">
-            <label for="q-phone">Phone</label>
-            <input type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" required data-msg="Please enter a 10-digit phone number">
-            <span class="field-err" data-err-for="q-phone"></span>
-          </div>
-          <div class="form-row">
-            <label for="q-email">Email</label>
-            <input type="email" id="q-email" name="email" autocomplete="email">
-            <span class="field-err" data-err-for="q-email"></span>
-          </div>
-          <div class="form-row">
-            <label for="q-zip">ZIP Code</label>
-            <input type="text" id="q-zip" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="10">
-          </div>
-          <div class="form-row">
-            <label for="q-service">Service Needed</label>
-            <select id="q-service" name="service">
-              <option selected>General Plumbing Repair</option>
+            <label for="service">Service Needed</label>
+            <select id="service" name="Service Needed">
+              <option value="">Select a service&hellip;</option>
               <option>Sewer Liners</option>
               <option>Epoxy Pipe Lining</option>
               <option>Water Repipes</option>
@@ -253,13 +258,17 @@
               <option>Hydro Jetting</option>
               <option>Something Else</option>
             </select>
-            <span class="field-err" data-err-for="q-service"></span>
+          </div>
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4"></textarea>
           </div>
         </div>
-        <button type="submit" class="btn btn-ghost btn-block">Request My Free Quote</button>
-        <p class="form-status" role="alert"></p>
-        <p class="form-note">Or call <a href="tel:+16576378529">(657) 637-8529</a>, we&rsquo;re on 24/7.</p>
+        <button type="submit" class="btn btn-primary btn-block">Request My Free Quote</button>
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
+        <div class="form-success">Thanks! A member of the Viper team will be in touch shortly.</div>
       </form>
+      </div>
     </div>
   </section>
   <section class="lp-stats" aria-label="At a glance">
@@ -528,12 +537,11 @@
 <script>
 document.querySelectorAll('a[data-service]').forEach(function (a) {
   a.addEventListener('click', function () {
-    var sel = document.getElementById('q-service');
+    var sel = document.getElementById('service');
     if (sel) sel.value = a.getAttribute('data-service');
   });
 });
 </script>
-<script src="/js/ghl-form.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

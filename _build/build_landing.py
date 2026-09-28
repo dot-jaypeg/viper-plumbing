@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generates the service landing pages (/<slug>/index.html), thank-you.html and 404.html.
+"""Generates the service landing pages (/<slug>/index.html) and 404.html.
 
 Per-page content lives in PAGES below; the shared shell (head, header, footer, mobile bar)
 is rendered around it. Edit this file and re-run it; don't hand-edit the generated HTML.
@@ -9,6 +9,7 @@ is rendered around it. Edit this file and re-run it; don't hand-edit the generat
 Copy rules: facts, offers, reviews and photos come from the existing site only.
 """
 import html
+import re
 import json
 from pathlib import Path
 
@@ -23,11 +24,6 @@ ADDRESS = {"street": "1840 W Lincoln Ave", "city": "Anaheim", "region": "CA", "z
 YELP = "https://www.yelp.com/biz/viper-rooter-and-plumbing-anaheim-7"
 CITIES = ["Anaheim", "Santa Ana", "Orange", "Fullerton", "Garden Grove", "Buena Park",
           "Placentia", "Yorba Linda", "Brea", "Tustin"]
-
-# Service options match the homepage/contact form so GHL sees the same values.
-SERVICE_OPTIONS = ["General Plumbing Repair", "Sewer Liners", "Epoxy Pipe Lining", "Water Repipes",
-                   "Gas Repipes", "Water Heater Swap", "Tankless Install", "Drain Cleaning",
-                   "Hydro Jetting", "Something Else"]
 
 # Verbatim from the site's review cards.
 REVIEWS = {
@@ -52,7 +48,8 @@ PAGES = [
         "lead_lg": "Family-owned plumbing services for Anaheim and the surrounding cities. From drain cleaning and water heaters to full water and gas repipes, you get an honest answer, upfront pricing and plumbing repairs done right the first time, 24 hours a day, 7 days a week.",
         "lead_sm": "Family-owned plumbing repairs in Anaheim and nearby cities, on call 24/7.",
         "checks": [f"Licensed &amp; Insured, Lic #{LICENSE}", "Open 24/7, Mon&ndash;Sun", "Upfront, Honest Pricing"],
-        "service": "General Plumbing Repair",
+        "service": None,
+        "source": "Landing Page - Plumbing Services",
         "stats": [("24/7", "Mon&ndash;Sun, 24 hours"), ("$89", "Drain cleaning special"),
                   ("20 mi", "Radius of Anaheim"), (f"#{LICENSE}", "Licensed &amp; insured")],
         "offer": True,
@@ -123,7 +120,7 @@ def head(title, description, canonical=None, og_image=None, noindex=False, jsonl
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Tag Manager: paste the container snippet here once the GTM ID is issued.
-     ghl-form.js already pushes generate_lead to the dataLayer on every successful lead. -->
+     js/app.js already fires gtag('event', 'generate_lead') on every successful lead. -->
 <script>window.dataLayer = window.dataLayer || [];</script>
 <title>{title}</title>
 <meta name="description" content="{description}">"""]
@@ -254,47 +251,19 @@ def business_schema():
 
 # ---------------------------------------------------------------- landing page
 def quote_form(p):
-    opts = "\n".join(
-        f'              <option{" selected" if o == p["service"] else ""}>{o}</option>' for o in SERVICE_OPTIONS)
-    return f"""      <form class="contact-form lp-form" id="quote" data-ghl-form novalidate>
-        <h2 class="form-title">Get a Free Quote</h2>
-        <p class="form-sub">Tell us what&rsquo;s going on. A member of the Viper team will be in touch shortly.</p>
-        <div class="form-hp" aria-hidden="true">
-          <label for="q-company-website">Company website</label>
-          <input type="text" id="q-company-website" name="company_website" tabindex="-1" autocomplete="off">
-        </div>
-        <div class="form-grid">
-          <div class="form-row full">
-            <label for="q-name">Full Name</label>
-            <input type="text" id="q-name" name="name" autocomplete="name" required data-msg="Please enter your name">
-            <span class="field-err" data-err-for="q-name"></span>
-          </div>
-          <div class="form-row">
-            <label for="q-phone">Phone</label>
-            <input type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" required data-msg="Please enter a 10-digit phone number">
-            <span class="field-err" data-err-for="q-phone"></span>
-          </div>
-          <div class="form-row">
-            <label for="q-email">Email</label>
-            <input type="email" id="q-email" name="email" autocomplete="email">
-            <span class="field-err" data-err-for="q-email"></span>
-          </div>
-          <div class="form-row">
-            <label for="q-zip">ZIP Code</label>
-            <input type="text" id="q-zip" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="10">
-          </div>
-          <div class="form-row">
-            <label for="q-service">Service Needed</label>
-            <select id="q-service" name="service">
-{opts}
-            </select>
-            <span class="field-err" data-err-for="q-service"></span>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-ghost btn-block">Request My Free Quote</button>
-        <p class="form-status" role="alert"></p>
-        <p class="form-note">Or call <a href="tel:{TEL}">{PHONE}</a>, we&rsquo;re on 24/7.</p>
-      </form>"""
+    """The homepage lead form, lifted verbatim from index.html so fields, GHL payload
+    (js/app.js, data-contact-form) and look stay identical. Only the hidden Source
+    value changes, plus the page's service preselected."""
+    src = (ROOT / "index.html").read_text()
+    m = re.search(r'( *)<form class="contact-form[^"]*" id="contact-form".*?</form>', src, re.S)
+    if not m:
+        raise SystemExit("homepage form not found in index.html")
+    form = m.group(0)
+    form = form.replace('class="contact-form reveal"', 'class="contact-form"')   # no scroll-in animation in the hero
+    form = form.replace('name="Source" value="Homepage"', f'name="Source" value="{p["source"]}"')
+    if p.get("service"):
+        form = form.replace(f"<option>{p['service']}</option>", f"<option selected>{p['service']}</option>")
+    return f'      <div class="hero-form" id="quote">\n{form}\n      </div>'
 
 
 def hero(p):
@@ -496,7 +465,7 @@ def cta(p, tone):
 PRESELECT_JS = """<script>
 document.querySelectorAll('a[data-service]').forEach(function (a) {
   a.addEventListener('click', function () {
-    var sel = document.getElementById('q-service');
+    var sel = document.getElementById('service');
     if (sel) sel.value = a.getAttribute('data-service');
   });
 });
@@ -545,7 +514,6 @@ def render_landing(p):
 </div>
 
 {PRESELECT_JS}
-<script src="/js/ghl-form.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>
@@ -575,7 +543,6 @@ def render_simple(title, description, h1, copy, actions, noindex=True, hero_img=
 """,
         footer(),
         """
-<script src="/js/ghl-form.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>
@@ -589,15 +556,6 @@ def main():
         out.parent.mkdir(exist_ok=True)
         out.write_text(render_landing(p))
         print("wrote", out.relative_to(ROOT))
-
-    (ROOT / "thank-you.html").write_text(render_simple(
-        "Thank You | Viper Rooter &amp; Plumbing",
-        "Thanks for contacting Viper Rooter &amp; Plumbing.",
-        "Thanks<span data-thanks-name></span>.<br>We&rsquo;ve Got It.",
-        "Your request is in. A member of the Viper team will be in touch shortly. Need help right now? Call us, we&rsquo;re on 24/7.",
-        f'{call_btn()}\n        <a class="btn btn-ghost btn-large" href="/">Back to Home</a>',
-    ))
-    print("wrote thank-you.html")
 
     (ROOT / "404.html").write_text(render_simple(
         "Page Not Found | Viper Rooter &amp; Plumbing",

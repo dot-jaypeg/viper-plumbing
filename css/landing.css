@@ -40,7 +40,7 @@
   z-index: 1;
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 460px);
   align-items: center;
   gap: clamp(28px, 4vw, 64px);
   padding-block: clamp(14px, 3vh, 48px);
@@ -105,64 +105,25 @@
 }
 .hero-checks svg { flex: none; width: 18px; height: 18px; color: var(--blue-light); }
 
-/* Compact quote form (name, phone, email, ZIP, service; no message box) */
-.lp-form {
-  position: relative;
-  border-top: 3px solid var(--blue-light);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 -12px 40px -24px var(--blue-glow);
-  padding: clamp(18px, 3vh, 32px) clamp(20px, 2.2vw, 30px);
-  background: rgba(18, 40, 65, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.lp-form .form-title {
-  font-size: clamp(1.5rem, 3.4vh, 2rem);
-  margin-bottom: 0.2em;
-  color: var(--white);
-}
-.lp-form .form-sub { font-size: 0.95rem; margin-bottom: clamp(10px, 2vh, 18px); }
-.lp-form .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(8px, 1.4vh, 14px) 14px;
-}
-.lp-form .form-row { gap: 5px; }
-.lp-form .form-row.full { grid-column: 1 / -1; }
-.lp-form .form-row label { font-size: 0.8rem; }
-.lp-form .form-row input,
-.lp-form .form-row select {
-  min-height: clamp(40px, 5.6vh, 48px);
-  padding-block: 6px;
-  width: 100%;
-  min-width: 0;
-}
-.lp-form .form-row input[aria-invalid="true"],
-.lp-form .form-row select[aria-invalid="true"] { border-color: #ff6b6b; }
-.field-err {
-  min-height: 0;
-  font-size: 0.78rem;
-  line-height: 1.3;
-  color: #ff8f8f;
-}
-.field-err:empty { display: none; }
-.lp-form .btn {
-  margin-top: clamp(12px, 2vh, 18px);
-  min-height: clamp(46px, 6.4vh, 56px);
-  padding-block: 8px;
-}
-.lp-form .form-note { margin-top: 10px; font-size: 0.8rem; line-height: 1.45; }
-.lp-form .form-note a { color: var(--white); font-weight: 600; white-space: nowrap; }
-.lp-form .form-status { border-color: rgba(255, 107, 107, 0.5); background: rgba(255, 107, 107, 0.08); }
-.lp-form .form-status:empty { display: none; }
-.lp-form .form-status a { color: var(--white); font-weight: 600; text-decoration: underline; }
+/* #quote clears the fixed announce bar + header when jumped to */
+.hero-form { scroll-margin-top: 136px; }
 
-/* Short laptop screens: drop nice-to-haves so the submit button stays visible */
-@media (min-width: 921px) and (max-height: 760px) {
-  .lp-form .form-sub { display: none; }
-  .lp-form .form-title { margin-bottom: 12px; }
+/* Hero quote form: the homepage's .contact-form, unchanged in look and fields.
+   On desktop only the spacing tightens on short screens (it reaches the homepage's
+   exact values at ~900px tall) so the submit button stays above the fold. */
+@media (min-width: 921px) {
+  .lp-hero .contact-form { padding: clamp(18px, 4vh, 36px); }
+  .lp-hero .form-fields { gap: clamp(8px, 2vh, 18px); margin-bottom: clamp(12px, 2.4vh, 22px); }
+  .lp-hero .form-row { gap: clamp(4px, 0.9vh, 8px); }
+  .lp-hero .form-row input,
+  .lp-hero .form-row select { padding-block: clamp(7px, 1.35vh, 12px); }
+  .lp-hero .form-row textarea { height: clamp(44px, 12vh, 110px); padding-block: clamp(7px, 1.35vh, 12px); }
+  .lp-hero .contact-form .btn { padding-block: clamp(10px, 1.7vh, 15px); }
 }
+
+/* Short laptop screens: drop nice-to-haves in the copy block */
 @media (min-width: 921px) and (max-height: 620px) {
-  .lp-hero .hero-checks, .lp-form .form-note { display: none; }
+  .lp-hero .hero-checks { display: none; }
   .lp-hero .lead-lg { display: none; }
   .lp-hero .lead-sm { display: block; }
 }
@@ -380,7 +341,7 @@
   .lp-hero .lead-sm { display: block; }
   .lp-hero .hero-checks { margin-top: clamp(14px, 2.5vh, 24px); gap: 6px 16px; }
   .lp-hero .hero-checks li { font-size: 0.92rem; }
-  .lp-form { max-width: 560px; }
+  .lp-hero .contact-form { max-width: 560px; }
 
   .lp-stats .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .lp-stats .stat:nth-child(3) { border-left: 0; }
@@ -394,7 +355,6 @@
 }
 @media (max-width: 600px) {
   .lp-hero .hero-actions .hero-quote { display: none; }   /* the fixed bar already has Free Quote */
-  .lp-form .form-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .faq summary { padding: 18px; }
   .faq details p { padding: 0 18px 20px; }
