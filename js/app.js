@@ -101,7 +101,7 @@
 
   // Lead forms — post straight from the browser to the GHL inbound webhook
   // (workflow "ENDPOINT - website-forms"). No server hop; GHL is the only backend.
-  var GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/Znb6kB9cRNv6WN1qmd1M/webhook-trigger/34276839-5659-4226-b945-a63d70595e3f';
+  var GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/Znb6kB9cRNv6WN1qmd1M/webhook-trigger/112ad8aa-ff53-4105-8ebb-955733c8c171';
   var PHONE_DISPLAY = '(657) 637-8529';
   var ATTR_KEY = 'viper-attr';
   var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
