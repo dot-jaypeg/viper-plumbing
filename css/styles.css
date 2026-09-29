@@ -881,7 +881,7 @@ body.no-scroll { overflow: hidden; height: 100%; }
 .form-fields { display: flex; flex-direction: column; gap: 18px; margin-bottom: 22px; }
 .form-row { display: flex; flex-direction: column; gap: 8px; }
 .form-row-split { flex-direction: row; gap: 18px; }
-.form-row-split > div { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.form-row-split > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 
 .form-row label {
   font-family: var(--font-display);
@@ -902,6 +902,8 @@ body.no-scroll { overflow: hidden; height: 100%; }
   font-family: var(--font-body);
   font-size: 1rem;
   resize: vertical;
+  width: 100%;
+  min-width: 0;
 }
 .form-row input:focus,
 .form-row select:focus,

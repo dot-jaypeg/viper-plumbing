@@ -114,7 +114,8 @@
 @media (min-width: 921px) {
   .lp-hero .contact-form { padding: clamp(18px, 4vh, 36px); }
   .lp-hero .form-fields { gap: clamp(8px, 2vh, 18px); margin-bottom: clamp(12px, 2.4vh, 22px); }
-  .lp-hero .form-row { gap: clamp(4px, 0.9vh, 8px); }
+  .lp-hero .form-row:not(.form-row-split),
+  .lp-hero .form-row-split > div { gap: clamp(4px, 0.9vh, 8px); }
   .lp-hero .form-row input,
   .lp-hero .form-row select { padding-block: clamp(7px, 1.35vh, 12px); }
   .lp-hero .form-row textarea { height: clamp(44px, 12vh, 110px); padding-block: clamp(7px, 1.35vh, 12px); }
