@@ -163,16 +163,16 @@ def header(quote_href="/contact.html"):
 
 <header class="site-header" id="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="Viper Rooter &amp; Plumbing — Home">
+    <a class="brand" href="{DOMAIN}/" aria-label="Viper Rooter &amp; Plumbing — Home">
       <img src="/assets/logos/viper-logo-white.png" alt="Viper Rooter &amp; Plumbing">
     </a>
 
     <nav class="main-nav" id="main-nav">
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="{DOMAIN}/">Home</a></li>
+        <li><a href="{DOMAIN}/about.html">About</a></li>
+        <li><a href="{DOMAIN}/services.html">Services</a></li>
+        <li><a href="{DOMAIN}/contact.html">Contact</a></li>
       </ul>
     </nav>
 
@@ -202,20 +202,20 @@ def footer():
 
     <nav class="footer-nav">
       <span class="footer-heading">Site</span>
-      <a href="/">Home</a>
-      <a href="/about.html">About</a>
-      <a href="/services.html">Services</a>
-      <a href="/#reviews">Reviews</a>
-      <a href="/contact.html">Contact</a>
+      <a href="{DOMAIN}/">Home</a>
+      <a href="{DOMAIN}/about.html">About</a>
+      <a href="{DOMAIN}/services.html">Services</a>
+      <a href="{DOMAIN}/#reviews">Reviews</a>
+      <a href="{DOMAIN}/contact.html">Contact</a>
     </nav>
 
     <nav class="footer-nav">
       <span class="footer-heading">Services</span>
 {lp_links}
-      <a href="/services.html">Sewer Liners</a>
-      <a href="/services.html">Water &amp; Gas Repipes</a>
-      <a href="/services.html">Water Heaters &amp; Tankless</a>
-      <a href="/services.html">Drain Cleaning &amp; Hydro Jetting</a>
+      <a href="{DOMAIN}/services.html">Sewer Liners</a>
+      <a href="{DOMAIN}/services.html">Water &amp; Gas Repipes</a>
+      <a href="{DOMAIN}/services.html">Water Heaters &amp; Tankless</a>
+      <a href="{DOMAIN}/services.html">Drain Cleaning &amp; Hydro Jetting</a>
     </nav>
 
     <div class="footer-contact">
@@ -564,7 +564,7 @@ def main():
         "That page couldn’t be found.",
         "Page Not Found",
         "The page you&rsquo;re looking for has moved or doesn&rsquo;t exist. Head back home, or call us, we&rsquo;re on 24/7.",
-        f'<a class="btn btn-ghost btn-large" href="/">Back to Home</a>\n        {call_btn()}',
+        f'<a class="btn btn-ghost btn-large" href="{DOMAIN}/">Back to Home</a>\n        {call_btn()}',
         hero_img="/assets/images/page-heroes/services-hero.jpg",
     ))
     print("wrote 404.html")

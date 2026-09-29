@@ -1,0 +1,94 @@
+# Custom Caddyfile for Railway (Railpack uses this instead of its generated default).
+# Based on Railpack's staticfile template, plus:
+#   - host-based routing: landing pages live on lp.viperplumbers.com, the main site on www
+#   - private repo files (client brief, notes, build scripts) are never served
+# Validate before pushing: caddy validate --config Caddyfile --adapter caddyfile
+# (a config that fails to load stops the site from starting on Railway).
+{
+	admin off
+	persist_config off
+	auto_https off
+
+	# Block private files before try_files rewrites the path (otherwise the block never fires)
+	order error before try_files
+
+	log {
+		format json
+	}
+
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+:{$PORT:80} {
+	log {
+		format json
+	}
+
+	respond /health 200
+
+	header {
+		X-XSS-Protection "1; mode=block"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data: https: *; style-src 'self' 'unsafe-inline' https: *; script-src 'self' 'unsafe-inline' https: *; font-src 'self' data: https: *; connect-src 'self' https: *; media-src 'self' https: *; object-src 'none'; frame-src 'self' https: *;"
+		-Server
+	}
+
+	# ---- Host routing (query strings are kept so gclid/UTMs survive every redirect) ----
+
+	# lp.viperplumbers.com/ -> the landing page
+	@lpRootWithQuery {
+		host lp.viperplumbers.com
+		path /
+		expression {query} != ""
+	}
+	redir @lpRootWithQuery /plumbing-services/?{query} 302
+
+	@lpRoot {
+		host lp.viperplumbers.com
+		path /
+		expression {query} == ""
+	}
+	redir @lpRoot /plumbing-services/ 302
+
+	# Main-site pages opened on lp -> same page on www
+	@mainPagesOnLp {
+		host lp.viperplumbers.com
+		path /index.html /about.html /about /services.html /services /contact.html /contact
+	}
+	redir @mainPagesOnLp https://www.viperplumbers.com{uri} 301
+
+	# Landing pages opened on the main site -> lp
+	@landingOnMain {
+		host www.viperplumbers.com viperplumbers.com
+		path /plumbing-services /plumbing-services/*
+	}
+	redir @landingOnMain https://lp.viperplumbers.com{uri} 301
+
+	# ---- Never serve private repo files ----
+	@private {
+		path /references /references/* /_build /_build/* /.claude /.claude/*
+		path /CLAUDE.md /README.md /Caddyfile /railpack.json
+	}
+	error @private 404
+
+	root * .
+
+	file_server {
+		hide .git .env* Caddyfile
+	}
+
+	encode {
+		gzip
+		zstd
+	}
+
+	try_files {path} {path}.html {path}/index.html
+
+	handle_errors {
+		rewrite * /{err.status_code}.html
+		file_server
+	}
+}
