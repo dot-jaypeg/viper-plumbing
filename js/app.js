@@ -104,14 +104,18 @@
   var GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/Znb6kB9cRNv6WN1qmd1M/webhook-trigger/112ad8aa-ff53-4105-8ebb-955733c8c171';
   var PHONE_DISPLAY = '(657) 637-8529';
   var ATTR_KEY = 'viper-attr';
-  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
+  var ATTR_MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000;   // matches Google Ads' 90-day gclid window
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'gbraid', 'wbraid', 'fbclid'];
 
-  // First-touch attribution: captured once, never overwritten
-  function captureFirstTouch() {
-    var stored = {};
-    try { stored = JSON.parse(localStorage.getItem(ATTR_KEY) || '{}'); } catch (e) {}
-    if (stored._captured) return stored;
+  // Latest-touch attribution: an ad-tagged visit replaces the saved source;
+  // an untagged visit keeps it (up to 90 days) so return visits stay credited.
+  function captureAttribution() {
     var query = new URLSearchParams(window.location.search);
+    var tagged = UTM_KEYS.some(function (k) { return query.get(k); });
+    var stored = null;
+    try { stored = JSON.parse(localStorage.getItem(ATTR_KEY) || 'null'); } catch (e) {}
+    var fresh = stored && stored._captured && (Date.now() - Date.parse(stored._captured) < ATTR_MAX_AGE_MS);
+    if (!tagged && fresh) return stored;
     var attr = {
       _captured: new Date().toISOString(),
       landing_page: window.location.pathname + window.location.search,
@@ -121,7 +125,7 @@
     try { localStorage.setItem(ATTR_KEY, JSON.stringify(attr)); } catch (e) {}
     return attr;
   }
-  var attribution = captureFirstTouch();
+  var attribution = captureAttribution();
 
   function toKey(name) {
     return String(name).trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
