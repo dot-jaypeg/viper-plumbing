@@ -20,6 +20,7 @@ PHONE = "(657) 637-8529"          # exactly as the site displays it (number-swap
 TEL = "+16576378529"
 CALL = f"Call {PHONE}"
 LICENSE = "1022901"
+ASSET_V = "20260929"   # bump when css/ or js/ changes, so returning visitors skip stale cached copies
 ADDRESS = {"street": "1840 W Lincoln Ave", "city": "Anaheim", "region": "CA", "zip": "92804"}
 YELP = "https://www.yelp.com/biz/viper-rooter-and-plumbing-anaheim-7"
 CITIES = ["Anaheim", "Santa Ana", "Orange", "Fullerton", "Garden Grove", "Buena Park",
@@ -135,9 +136,9 @@ def head(title, description, canonical=None, og_image=None, noindex=False, jsonl
 <meta property="og:url" content="{canonical}">""")
     if og_image:
         parts.append(f'<meta property="og:image" content="{DOMAIN}{og_image}">')
-    parts.append("""<link rel="icon" href="/assets/logos/viper-logo-transparent.png">
-<link rel="stylesheet" href="/css/styles.css">
-<link rel="stylesheet" href="/css/landing.css">""")
+    parts.append(f"""<link rel="icon" href="/assets/logos/viper-logo-transparent.png">
+<link rel="stylesheet" href="/css/styles.css?v={ASSET_V}">
+<link rel="stylesheet" href="/css/landing.css?v={ASSET_V}">""")
     for block in jsonld:
         parts.append('<script type="application/ld+json">\n' + json.dumps(block, indent=2) + "\n</script>")
     parts.append("</head>")
@@ -514,7 +515,7 @@ def render_landing(p):
 </div>
 
 {PRESELECT_JS}
-<script src="/js/app.js"></script>
+<script src="/js/app.js?v={ASSET_V}"></script>
 </body>
 </html>
 """,
@@ -542,8 +543,8 @@ def render_simple(title, description, h1, copy, actions, noindex=True, hero_img=
 </main>
 """,
         footer(),
-        """
-<script src="/js/app.js"></script>
+        f"""
+<script src="/js/app.js?v={ASSET_V}"></script>
 </body>
 </html>
 """,
