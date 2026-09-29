@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DOMAIN = "https://viperplumbers.com"          # main site
+DOMAIN = "https://www.viperplumbers.com"      # main site (bare domain forwards here)
 LP_DOMAIN = "https://lp.viperplumbers.com"    # landing pages are served from the lp subdomain
 BIZ = "Viper Rooter & Plumbing"
 PHONE = "(657) 637-8529"          # exactly as the site displays it (number-swap matching)
