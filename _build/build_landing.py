@@ -14,7 +14,8 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DOMAIN = "https://viperrooterandplumbing.com"
+DOMAIN = "https://viperplumbers.com"          # main site
+LP_DOMAIN = "https://lp.viperplumbers.com"    # landing pages are served from the lp subdomain
 BIZ = "Viper Rooter & Plumbing"
 PHONE = "(657) 637-8529"          # exactly as the site displays it (number-swap matching)
 TEL = "+16576378529"
@@ -135,7 +136,7 @@ def head(title, description, canonical=None, og_image=None, noindex=False, jsonl
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}">""")
     if og_image:
-        parts.append(f'<meta property="og:image" content="{DOMAIN}{og_image}">')
+        parts.append(f'<meta property="og:image" content="{LP_DOMAIN}{og_image}">')
     parts.append(f"""<link rel="icon" href="/assets/logos/viper-logo-transparent.png">
 <link rel="stylesheet" href="/css/styles.css?v={ASSET_V}">
 <link rel="stylesheet" href="/css/landing.css?v={ASSET_V}">""")
@@ -474,7 +475,7 @@ document.querySelectorAll('a[data-service]').forEach(function (a) {
 
 
 def render_landing(p):
-    canonical = f"{DOMAIN}/{p['slug']}/"
+    canonical = f"{LP_DOMAIN}/{p['slug']}/"
     service_ld = {
         "@context": "https://schema.org",
         "@type": "Service",
