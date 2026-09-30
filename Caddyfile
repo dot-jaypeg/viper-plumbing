@@ -56,7 +56,7 @@
 	# Main-site pages opened on lp -> same page on www
 	@mainPagesOnLp {
 		host lp.viperplumbers.com
-		path /index.html /about.html /about /services.html /services /contact.html /contact
+		path /index.html /about.html /about /services.html /services /contact.html /contact /blog /blog/*
 	}
 	redir @mainPagesOnLp https://www.viperplumbers.com{uri} 301
 
