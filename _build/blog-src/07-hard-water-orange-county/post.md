@@ -27,7 +27,7 @@ Each option earns its place on what it measurably does.
 
 Flushing a tank water heater on a regular schedule drains the sediment that settles on the bottom, which restores efficiency and extends the tank's life, and it is inexpensive. For a tankless unit, descaling the heat exchanger on the right interval clears the scale that forms on the hottest surface, and in hard OC water that interval is more frequent than the manufacturer's average-water default. These two maintenance steps are the lowest-cost, highest-return moves for most homes, and they are things we can do or set you up to schedule.
 
-A whole-house salt-based softener removes the hardness minerals before the water reaches your pipes and heater, which slows scale everywhere at once. It is a larger investment with its own upkeep, and whether it pays off depends on your home and how much the hard water is costing you. Viper does not sell or install softeners. If a softener is the right long-term step for your home, we will say so and refer you out. Our work is protecting the heater and pipes through flushing, descaling, and repair.
+A whole-house salt-based softener removes the hardness minerals before the water reaches your pipes and heater, which slows scale everywhere at once. It is a larger investment with its own upkeep, and whether it pays off depends on your home and how much the hard water is costing you. If a softener is the right long-term step for your home, we will tell you so. Our work is protecting the heater and pipes through flushing, descaling, and repair.
 
 Salt-free magnetic and electronic conditioners are marketed as no-salt, no-maintenance alternatives. The evidence that they reduce hardness the way a salt-based softener does is weak, so treat those claims with caution and put your money toward maintenance that measurably works.
 
@@ -44,7 +44,7 @@ Anaheim's water runs on the harder end, around 300 to 316 parts per million, rou
 More often than in a soft-water area. A regular flush, and for tankless a descaling on the right interval for hard water, is the lowest-cost way to protect the unit. We set the schedule to your equipment.
 
 **Do water softeners really work?**
-A salt-based softener removes hardness before it reaches your plumbing, which slows scale throughout the house. It is a larger investment with upkeep. Viper does not sell softeners, so a recommendation to install one is a referral, not a sale.
+A salt-based softener removes hardness before it reaches your plumbing, which slows scale throughout the house. It is a larger investment with upkeep, so it is worth weighing against what the hard water is costing you.
 
 **Are magnetic or electronic water conditioners worth it?**
 The evidence that they reduce hardness the way a salt-based softener does is weak. Maintenance that measurably protects your heater and pipes is the better place to spend.
@@ -54,5 +54,5 @@ Existing scale can be flushed or descaled out of a heater, which recovers effici
 
 ## Reduce hard-water wear on your heater and plumbing
 
-Wondering what hard water is costing your home? Call Viper Rooter & Plumbing at (657) 637-8529. We are a family-owned Anaheim plumber, licensed and insured (LIC #1022901), serving Orange County 24/7. We will tell you which steps actually reduce scale for your equipment, handle the flushing and descaling, and refer you out for a softener if that is the right call.
+Wondering what hard water is costing your home? Call Viper Rooter & Plumbing at (657) 637-8529. We are a family-owned Anaheim plumber, licensed and insured (LIC #1022901), serving Orange County 24/7. We will tell you which steps actually reduce scale for your equipment, handle the flushing and descaling, and tell you whether a softener is worth considering.
 

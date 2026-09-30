@@ -15,9 +15,9 @@ word_count: 1210
 
 A sewer camera sends a scope down the line so you can see its interior condition on a screen. Knowing what the common findings look like lets you follow the inspection instead of just taking a verdict. The main ones are a belly (a low, sagging section where water pools), an offset (where two pipe sections have shifted out of alignment at a joint), root intrusion (fine strands or a mass entering at a joint or crack), cracks and breaks (dark lines or missing wall), and scaling (mineral or rust buildup narrowing the interior). What each one means for the repair depends on how severe it is and where it sits, which is why the inspection drives the recommendation. Below is how to read each finding, and what it may point to.
 
-## Before you interpret: watch it live and keep a copy
+## Before you interpret: watch it live
 
-One short habit gives the footage context: ask to watch the inspection live as it runs, and get a copy afterward. A continuous run that starts at your cleanout gives you a clear, unbroken view from your own access point into your line, which is easy to follow and easy to keep for reference. That is the whole verification step. The rest of this guide is about reading what the camera shows.
+One short habit gives the footage context: ask to watch the inspection live as it runs. A continuous run that starts at your cleanout gives you a clear, unbroken view from your own access point into your line, which is easy to follow. That is the whole verification step. The rest of this guide is about reading what the camera shows.
 
 ## What you are looking at, finding by finding
 
@@ -43,7 +43,7 @@ Roots at otherwise sound joints often mean jetting, and where the joints keep le
 
 ## Why this is smart before buying an older home
 
-If you are buying an older Orange County home, a sewer camera inspection is one of the more useful small inspections to add. The sewer lateral is expensive to repair and is not covered by a standard home inspection, so a scope shows whether you would be inheriting roots, a belly, or a failing line before you own it. Watch that inspection live and keep the footage. It is useful information for a negotiation and for planning.
+If you are buying an older Orange County home, a sewer camera inspection is one of the more useful small inspections to add. The sewer lateral is expensive to repair and is not covered by a standard home inspection, so a scope shows whether you would be inheriting roots, a belly, or a failing line before you own it. Watch that inspection live. What it shows is useful information for a negotiation and for planning.
 
 ## Frequently Asked Questions
 
@@ -64,5 +64,5 @@ For an older home, it is worth it. The lateral is costly to repair and not part 
 
 ## See your line for yourself
 
-Want your sewer line scoped, with footage you can keep? Call Viper Rooter & Plumbing at (657) 637-8529. We are a family-owned Anaheim plumber, licensed and insured (LIC #1022901), serving Orange County 24/7. You watch the camera live from your own cleanout, you keep the footage, and we walk you through what each finding means and what it may take to fix, with the price before we start.
+Want your sewer line scoped? Call Viper Rooter & Plumbing at (657) 637-8529. We are a family-owned Anaheim plumber, licensed and insured (LIC #1022901), serving Orange County 24/7. You watch the camera live from your own cleanout, and we walk you through what each finding means and what it may take to fix, with the price before we start.
 

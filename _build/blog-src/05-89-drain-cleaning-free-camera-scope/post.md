@@ -27,7 +27,7 @@ The free camera scope is not a hook to manufacture expensive work. It is there s
 
 Let us name the trap directly, because you already know it exists. The classic drain-special scam works two ways. First, the advertised price quietly covers only a short run of a secondary line, so the moment your actual clog is anywhere else, the price jumps. Second, and worse, some outfits run a camera and show you alarming footage of a broken pipe that may not even be yours, then use it to sell a replacement you do not need.
 
-Here is how we make sure that cannot happen with us. You watch the camera screen live, in real time, while we run it. Before we go down the line, we can film something identifiable at your own cleanout so you know the footage is your pipe and not a stock clip. And we do not recommend a repair off footage you did not see. If a company will not let you watch the screen or hand you a copy, that is the tell, and it is exactly the behavior our free scope is built to be the opposite of.
+Here is how we make sure that cannot happen with us. You watch the camera screen live, in real time, while we run it. And we do not recommend a repair off footage you did not see. If a company will not let you watch the screen, that is the tell, and it is exactly the behavior our free scope is built to be the opposite of.
 
 ## Snake, jet, or repair: what each one is actually for
 
@@ -51,7 +51,7 @@ Cutting the corner cuts the other way too. If the camera clearly shows roots or 
 It is a real price for cleaning a standard, accessible drain through a cleanout, and it includes the free camera scope. If the camera finds a problem a cleaning cannot fix, that additional work is quoted separately and you approve it first. We put that in writing up front.
 
 **What does the free camera scope actually show?**
-It shows the inside of your line so you can see roots, grease buildup, bellies, offsets, and cracks. You watch the screen live, and you can get a copy. It is how you confirm the real cause instead of guessing.
+It shows the inside of your line so you can see roots, grease buildup, bellies, offsets, and cracks. You watch the screen live while we run it. It is how you confirm the real cause instead of guessing.
 
 **Why is my drain still clogged after it was snaked?**
 Because a snake clears the blockage in the way but not the cause behind it, like grease on the wall or roots at a joint. If a drain re-clogs after snaking, the camera usually shows why, and hydro jetting or a repair is the durable fix.
@@ -59,10 +59,7 @@ Because a snake clears the blockage in the way but not the cause behind it, like
 **Will you try to upsell me during the special?**
 We only recommend more work when the camera shows a problem a cleaning cannot fix, and we show you that footage first. If the scope is clean, the $89 cleaning is the whole job.
 
-**Can I get a copy of my camera footage?**
-Yes. You watch it live while we run it, and you can have a copy. Being able to keep the footage is part of how you can confirm the recommendation for yourself.
-
 ## Book the $89 cleaning and see for yourself
 
-Want the drain cleared and the line checked? Call Viper Rooter & Plumbing at (657) 637-8529. We are a family-owned Anaheim plumber, licensed and insured (LIC #1022901), serving Orange County 24/7. You watch the camera live, you keep the footage, and we tell you exactly what is wrong and what it costs before we do anything beyond the cleaning.
+Want the drain cleared and the line checked? Call Viper Rooter & Plumbing at (657) 637-8529. We are a family-owned Anaheim plumber, licensed and insured (LIC #1022901), serving Orange County 24/7. You watch the camera live, and we tell you exactly what is wrong and what it costs before we do anything beyond the cleaning.
 
