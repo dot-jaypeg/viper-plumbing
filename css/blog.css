@@ -23,20 +23,20 @@
 .topic-filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
+  gap: 6px;
+  margin-bottom: 28px;
 }
 .topic-chip {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--gray);
   background: transparent;
   border: 1px solid var(--border-strong);
   border-radius: 999px;
-  padding: 8px 18px;
+  padding: 4px 12px;
   cursor: pointer;
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
 }
@@ -45,7 +45,7 @@
   color: var(--white);
   background: var(--blue);
   border-color: var(--blue);
-  box-shadow: 0 0 24px var(--blue-glow);
+  box-shadow: 0 0 12px var(--blue-glow);
 }
 
 .post-grid {

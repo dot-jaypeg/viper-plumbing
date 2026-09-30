@@ -27,7 +27,7 @@ from build_landing import (ROOT, DOMAIN, BIZ, PHONE, TEL, CALL, LICENSE, ASSET_V
 SRC = ROOT / "_build" / "blog-src"
 OUT = ROOT / "blog"
 IMG_DIR = ROOT / "assets" / "images" / "blog"
-BLOG_CSS_V = "20260930b"   # bump when css/blog.css changes
+BLOG_CSS_V = "20260930c"   # bump when css/blog.css changes
 PUBLISHED = "2026-09-30"   # default publish date; override per post with "date" in POSTS
 
 # Per-post settings. "images" lists the files to use, lead image first (it's the card/OG
